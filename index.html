@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Butter Chicken · HM-LCDN</title>
+<style>
+  :root { --ink:#1c1410; --paper:#f6efe4; --card:#fffaf3; --line:#e4d3bc; --spice:#c4511a; --ok:#1f7a4d; --miss:#a33b2b; --maybe:#8a5a12; }
+  * { box-sizing: border-box; }
+  body { margin:0; font:16px/1.45 Georgia, "Iowan Old Style", serif; color:var(--ink); background:var(--paper); }
+  header { padding:28px 22px 12px; max-width:1080px; margin:0 auto; }
+  h1 { font-size:2rem; margin:0 0 4px; }
+  .sub { color:#6d5844; margin:0 0 14px; }
+  .bar { display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+  input[type=search] { flex:1; min-width:220px; padding:10px 12px; border:1px solid var(--line); border-radius:10px; font:inherit; background:#fff; }
+  button.chip { border:1px solid var(--line); background:#fff; border-radius:999px; padding:6px 12px; cursor:pointer; font:inherit; }
+  button.chip.on { background:var(--ink); color:#fff; border-color:var(--ink); }
+  main { max-width:1080px; margin:0 auto; padding:8px 22px 48px; display:grid; gap:16px; }
+  section { background:var(--card); border:1px solid var(--line); border-radius:16px; padding:16px 18px; }
+  h2 { margin:0 0 10px; font-size:1.2rem; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:10px; }
+  .item { border:1px solid var(--line); border-radius:12px; padding:10px 12px; background:#fff; }
+  .item h3 { margin:0 0 4px; font-size:1rem; }
+  .badge { display:inline-block; border-radius:999px; padding:1px 8px; font-size:.82rem; margin-right:4px; }
+  .have { background:#e5f6ec; color:var(--ok); }
+  .need { background:#fde8e4; color:var(--miss); }
+  .ask { background:#fff1d6; color:var(--maybe); }
+  ul { margin:6px 0 0; padding-left:18px; }
+  table { width:100%; border-collapse:collapse; font-size:.92rem; }
+  th, td { text-align:left; padding:6px 8px; border-bottom:1px solid var(--line); vertical-align:top; }
+  .muted { color:#6d5844; font-size:.9rem; }
+  canvas { width:100%; height:220px; background:#fff; border-radius:10px; }
+  .hero { display:grid; grid-template-columns:120px 1fr; gap:12px; align-items:center; }
+  .plate { width:120px; height:120px; border-radius:18px; background:radial-gradient(circle at 30% 30%, #f3c27a, #c4511a 55%, #6b2a12); }
+  code { font-family:ui-monospace, SFMono-Regular, Menlo, monospace; font-size:.85rem; }
+</style>
+</head>
+<body>
+<header>
+  <div class="hero">
+    <div class="plate" aria-hidden="true"></div>
+    <div>
+      <h1>Butter chicken ledger</h1>
+      <p class="sub">Single-file HTML CDN. Zip 20817 shelf estimates refreshed 6 Oct 2026. Search filters every card.</p>
+      <div class="bar">
+        <input id="q" type="search" placeholder="Lookup ingredient, store, or recipe…" />
+        <button class="chip on" data-filter="all">All</button>
+        <button class="chip" data-filter="need">Need</button>
+        <button class="chip" data-filter="have">Pantry?</button>
+        <button class="chip" data-filter="price">Prices</button>
+      </div>
+    </div>
+  </div>
+</header>
+<main>
+  <section id="audit">
+    <h2>Ingredient audit · 4 servings, ~2 lb thighs</h2>
+    <div class="grid" id="items"></div>
+  </section>
+  <section>
+    <h2>Parallel cook plan</h2>
+    <ol>
+      <li>Night before, or morning: yogurt-spice marinade on thighs. Freeze flat if meal-prepping.</li>
+      <li>While chicken rests out of the fridge: bloom whole spices in oil or ghee, sweat onion, garlic, ginger.</li>
+      <li>Sear chicken in a second pan while the masala simmers with tomato and paste.</li>
+      <li>Start basmati (rinse, soak 15 min, then simmer) during the sauce simmer.</li>
+      <li>Finish sauce with butter or yogurt and a splash of acid. Naan in a dry skillet last 4 minutes.</li>
+    </ol>
+    <p class="muted">Active time about 35 minutes if sear and rice overlap. Pressure-cooker path: 12 minutes high pressure after the sear, natural release 8.</p>
+  </section>
+  <section>
+    <h2>Store price tree · package price, not recipe portion</h2>
+    <table id="prices">
+      <thead><tr><th>Item</th><th>Aldi</th><th>Giant</th><th>Safeway</th><th>Trader Joe’s</th><th>Great Wall</th></tr></thead>
+      <tbody></tbody>
+    </table>
+    <p class="muted">Safeway figures track the public butter-chicken shop list (thighs value pack, Lucerne cream and butter, Contadina paste). Aldi sauce jar is the published 2026 Burman’s price. Other cells are typical Bethesda/North Bethesda shelf bands, not a live cart.</p>
+  </section>
+  <section>
+    <h2>Cost vs flavor · 4 servings</h2>
+    <table>
+      <thead><tr><th>Build</th><th>Est. cost</th><th>Flavor</th><th>Call</th></tr></thead>
+      <tbody>
+        <tr><td>Baseline cashew-paste</td><td>$16–20</td><td>8.4</td><td>Best homemade balance if cashews are already in the pantry.</td></tr>
+        <tr><td>Commercial sauce kit (Burman’s + thighs)</td><td>$11–14</td><td>6.6</td><td>Wins on cost and weeknight speed. Loses toasted-spice depth.</td></tr>
+        <tr><td>Ultra-rich Mughlai hybrid</td><td>$22–28</td><td>9.1</td><td>Wins flavor. Cream, extra butter, and nuts make it the expensive plate.</td></tr>
+      </tbody>
+    </table>
+  </section>
+  <section>
+    <h2>Food-at-home CPI, U.S. city average</h2>
+    <canvas id="cpi" width="960" height="220"></canvas>
+    <p class="muted">Index 1982–84 = 100. Dec/year-end where available; 2026 is August (321.5). Source: BLS CUUR0000SAF11, pulled 6 Oct 2026. The jump is national (2021–22). Bethesda retail sits above the national index because of rent and store mix, not a separate inflation series.</p>
+  </section>
+  <section>
+    <h2>Lookup script</h2>
+    <pre><code>const hit = DATA.items.filter(i =&gt; i.name.toLowerCase().includes(q));
+const cheapest = DATA.prices.filter(p =&gt; p.item === hit[0]?.name)
+  .sort((a,b) =&gt; a.aldi - b.aldi);</code></pre>
+    <p class="muted">DATA is in this file. Open the console and call <code>lookup("cream")</code>.</p>
+  </section>
+</main>
+<script>
+const DATA = {
+  updated: "2026-10-06",
+  zip: "20817",
+  servings: 4,
+  items: [
+    { name: "Boneless chicken thighs", amount: "2 lb", status: "need", note: "Safeway value pack listed near $8.97 / 3 lb.", group: "protein" },
+    { name: "Plain yogurt", amount: "1 cup", status: "ask", note: "Marinade. Greek works if you loosen it.", group: "dairy" },
+    { name: "Butter", amount: "3 tbsp", status: "ask", note: "Subsets: unsalted stick, cultured, or ghee. Skip if the stock butter is rancid.", group: "dairy" },
+    { name: "Heavy cream", amount: "1/2 cup", status: "need", note: "Healthier finish: full-fat yogurt off heat, or half cream / half evaporated milk.", group: "dairy" },
+    { name: "Chicken stock", amount: "1/2 cup", status: "need", note: "Expired carton: discard. Use water plus a pinch of salt, or a fresh low-sodium box.", group: "pantry" },
+    { name: "Tomato paste", amount: "2 tbsp", status: "ask", note: "6 oz can covers several batches.", group: "pantry" },
+    { name: "Crushed tomatoes", amount: "14 oz", status: "ask", note: "Fire-roasted if you want char.", group: "pantry" },
+    { name: "Yellow onion", amount: "1 large", status: "ask", note: "", group: "produce" },
+    { name: "Garlic", amount: "4 cloves", status: "ask", note: "Crush and rest 10 min for allicin.", group: "produce" },
+    { name: "Ginger", amount: "1 tbsp grated", status: "need", note: "", group: "produce" },
+    { name: "Oil", amount: "2 tbsp", status: "ask", note: "Healthier sear: avocado oil. Ghee still wins flavor.", group: "pantry" },
+    { name: "Garam masala", amount: "1.5 tsp", status: "ask", note: "Bloom in fat, do not boil it raw.", group: "spice" },
+    { name: "Kashmiri chili or paprika", amount: "1 tsp", status: "ask", note: "Color without harsh heat.", group: "spice" },
+    { name: "Basmati rice", amount: "1.5 cups dry", status: "need", note: "Added side. Rinse until water runs clearer.", group: "side" },
+    { name: "Naan", amount: "4 pieces", status: "need", note: "Store bakery or skillet from dough.", group: "side" },
+    { name: "Cilantro and lemon", amount: "to finish", status: "need", note: "Acid balances the butter.", group: "produce" }
+  ],
+  prices: [
+    { item: "Chicken thighs, ~2 lb", aldi: 5.5, giant: 7.5, safeway: 8.97, tj: 6.99, wall: 5.99 },
+    { item: "Butter, 1 lb", aldi: 3.49, giant: 4.99, safeway: 5.99, tj: 4.49, wall: 4.29 },
+    { item: "Heavy cream, pint", aldi: 2.89, giant: 4.49, safeway: 5.99, tj: 3.49, wall: 3.29 },
+    { item: "Basmati, 2 lb", aldi: 2.49, giant: 3.49, safeway: 3.99, tj: 3.29, wall: 2.79 },
+    { item: "Butter chicken sauce jar", aldi: 3.69, giant: 4.49, safeway: 4.99, tj: 3.99, wall: 3.49 }
+  ],
+  cpi: [239.0,238.6,239.7,241.8,250.2,258.9,288.5,302.9,306.5,313.4,321.5],
+  years: [2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026]
+};
+function badge(s){ return s==="need"?'<span class="badge need">need</span>':s==="have"?'<span class="badge have">have</span>':'<span class="badge ask">?</span>'; }
+function render(q, filter){
+  const items = DATA.items.filter(i => {
+    const blob = (i.name+" "+i.note+" "+i.group).toLowerCase();
+    if (q && !blob.includes(q)) return false;
+    if (filter==="need") return i.status==="need";
+    if (filter==="have") return i.status!=="need";
+    if (filter==="price") return /rice|cream|butter|chicken|naan|stock/i.test(i.name);
+    return true;
+  });
+  document.getElementById("items").innerHTML = items.map(i => `<article class="item"><h3>${i.name}</h3><div>${badge(i.status)} <span class="muted">${i.amount}</span></div><p class="muted">${i.note||""}</p></article>`).join("") || "<p>No matches.</p>";
+  document.querySelector("#prices tbody").innerHTML = DATA.prices.filter(p => !q || p.item.toLowerCase().includes(q)).map(p => `<tr><td>${p.item}</td><td>$${p.aldi.toFixed(2)}</td><td>$${p.giant.toFixed(2)}</td><td>$${p.safeway.toFixed(2)}</td><td>$${p.tj.toFixed(2)}</td><td>$${p.wall.toFixed(2)}</td></tr>`).join("");
+}
+let filter = "all";
+document.getElementById("q").addEventListener("input", e => render(e.target.value.toLowerCase(), filter));
+document.querySelectorAll(".chip").forEach(b => b.onclick = () => {
+  document.querySelectorAll(".chip").forEach(x => x.classList.remove("on"));
+  b.classList.add("on"); filter = b.dataset.filter; render(document.getElementById("q").value.toLowerCase(), filter);
+});
+function lookup(q){ return DATA.items.filter(i => i.name.toLowerCase().includes(String(q).toLowerCase())); }
+window.lookup = lookup; window.DATA = DATA;
+render("", "all");
+const c = document.getElementById("cpi"), g = c.getContext("2d");
+const pad = 28, w = c.width, h = c.height;
+const min = 220, max = 340;
+g.clearRect(0,0,w,h);
+g.strokeStyle = "#e4d3bc"; g.beginPath();
+for (let i=0;i<4;i++){ const y = pad + (h-pad*2)*i/3; g.moveTo(pad,y); g.lineTo(w-8,y); }
+g.stroke();
+g.strokeStyle = "#c4511a"; g.lineWidth = 2; g.beginPath();
+DATA.cpi.forEach((v,i) => {
+  const x = pad + (w-pad-8)*i/(DATA.cpi.length-1);
+  const y = h-pad - (v-min)/(max-min)*(h-pad*2);
+  i? g.lineTo(x,y): g.moveTo(x,y);
+});
+g.stroke();
+g.fillStyle = "#6d5844"; g.font = "12px Georgia";
+DATA.years.forEach((y,i) => { if (i%2) return; const x = pad + (w-pad-8)*i/(DATA.years.length-1); g.fillText(String(y), x-14, h-8); });
+</script>
+</body>
+</html>
